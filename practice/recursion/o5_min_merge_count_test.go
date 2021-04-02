@@ -11,13 +11,14 @@ import (
 
 // n 要大于等于 硬币金额才能继续调用  否则return (无法达成条件)
 // 每种面值的硬币都可以选择使用或者不使用
-// f(41) = min {  f(41 - 25) + 1,  f(41 - 10) + 1 , f(41 - 5) + 1 ,  f(41 - 1) + 1 }
+// f(41) = min {  f(41 - 25) + 1,  f(41 - 10) + 1, f(41 - 5) + 1,  f(41 - 1) + 1 }
 
 func minMergeCount(n int, coins []int, takeRecord string) (int, string) {
 	if n == 0 {
 		return 0, takeRecord
 	}
-	min := 1 << 31 - 1 - 1
+	// 局部决策 回到当前层时 比较两种不同方案在当前层得到结果的最小值
+	min := 1 << 31 - 2
 	path := ""
 
 	for i := 0; i < len(coins); i++ {
@@ -26,6 +27,7 @@ func minMergeCount(n int, coins []int, takeRecord string) (int, string) {
 				n-coins[i],
 				coins,
 				fmt.Sprintf("%s  %d", takeRecord, coins[i]))
+
 			min = int(math.Min(float64(min), float64(count+1)))
 			if min == count+1 {
 				path = p

@@ -10,7 +10,7 @@ import (
 
 // 1 -> 2 -> 3 -> nil
 // 1 -> 2 <- 3
-// 1为head； 让2的下一个指向1； 让1和后面断开关联；返回reverseHead（ps 当前是3打头的 换头操作）
+// 1为head； 让2的下一个指向1； 让1和后面断开关联；返回reverseHead（ps 当前是3打头的 即换头操作）
 func reverseNode(head *datastructure.NodeList) *datastructure.NodeList {
 	if head == nil || head.Next == nil {
 		return head
@@ -19,6 +19,26 @@ func reverseNode(head *datastructure.NodeList) *datastructure.NodeList {
 	head.Next.Next = head
 	head.Next = nil
 	return reverseHead
+}
+
+func reverseNodeV2(head *datastructure.NodeList) *datastructure.NodeList {
+	var pre *datastructure.NodeList
+	cur := head
+
+	tail := head
+	for tail.Next != nil {
+		tail = tail.Next
+	}
+
+	for cur != tail {
+		tmp := cur.Next
+		cur.Next = pre
+
+		pre = cur
+		cur = tmp
+	}
+	tail.Next = pre
+	return tail
 }
 
 func TestReverseNode(t *testing.T) {
@@ -33,6 +53,7 @@ func TestReverseNode(t *testing.T) {
 		},
 	}
 	node = reverseNode(node)
+	//node = reverseNodeV2(node)
 
 	for node != nil {
 		fmt.Printf("%d -> ", node.Val)

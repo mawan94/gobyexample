@@ -1,4 +1,9 @@
 package recursion
+
+import (
+	"testing"
+)
+
 //实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。
 //示例 1：
 //
@@ -13,7 +18,6 @@ package recursion
 //输入：x = 2.00000, n = -2
 //输出：0.25000
 //解释：2-2 = 1/22 = 1/4 = 0.25
-// 
 //
 //提示：
 //
@@ -21,3 +25,21 @@ package recursion
 //-231 <= n <= 231-1
 //-104 <= xn <= 104
 
+func pow(x float64, n int) float64 {
+	if n == 0 {
+		return 1
+	}
+	if n == 1 {
+		return x
+	}
+	if n == -1 {
+		return 1 / x
+	}
+	half := pow(x, n/2)
+	checkOdd := pow(x, n%2)
+	return half * half * checkOdd
+}
+
+func TestPow(t *testing.T) {
+	println(pow(2, 3))
+}

@@ -19,7 +19,7 @@ func swapPairs(head *datastructure.NodeList) *datastructure.NodeList {
 	if head == nil || head.Next == nil {
 		return head
 	}
-	// 需要预先保存一下head 和 head.next （递归结束合并结果时候会使用到）
+	// 需要预先保存一下head（已有参数） 和 head.next （递归结束合并结果时候会使用到）
 	nextNode := head.Next
 
 	result := swapPairs(head.Next.Next)

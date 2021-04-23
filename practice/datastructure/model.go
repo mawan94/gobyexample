@@ -4,44 +4,74 @@ package datastructure
 Model  -  FOR TEST
 */
 
-
-
 //单向链表
 type NodeList struct {
 	Val  interface{}
 	Next *NodeList
 }
 
-func GenerateRandomNodeList(len int) *NodeList {
-	return nil
-}
-
-
-
-
 //双向链表
-type LinkedList struct {
-	Val      interface{}
-	Previous *LinkedList
-	Next     *LinkedList
+type LinkedListNode struct {
+	Val        interface{}
+	Prev, Next *LinkedListNode
 }
-
-func GenerateRandomLinkedList(len int) *LinkedList {
-	return nil
-}
-
-
-
 
 // 二叉树
 type TreeNode struct {
-	Val   interface{}
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func GenerateRandomBinaryTree(len int) *TreeNode {
-	return nil
+	Val         interface{}
+	Left, Right *TreeNode
 }
 
 // *****************************************************************
+type Stack struct {
+	top interface{}
+	arr []interface{}
+}
+
+func (s *Stack) Push(val interface{}) {
+	s.top = val
+	s.arr = append(s.arr, val)
+}
+
+func (s *Stack) Pop() interface{} {
+	if s.IsEmpty() {
+		return nil
+	}
+	ret := s.top
+	s.arr = s.arr[:len(s.arr)-1]
+	if len(s.arr) == 0 {
+		s.top = nil
+	} else {
+		s.top = s.arr[len(s.arr)-1]
+	}
+	return ret
+}
+
+func (s *Stack) IsEmpty() bool {
+	return s.arr == nil || len(s.arr) == 0
+}
+
+// *****************************************************************
+type Queue struct {
+	arr []interface{}
+}
+
+func (q *Queue) IsEmpty() bool {
+	return q.arr == nil || len(q.arr) == 0
+}
+
+func (q *Queue) Poll() interface{} {
+	if q.IsEmpty() {
+		return nil
+	}
+	ret := q.arr[0]
+	q.arr = q.arr[1:]
+	return ret
+}
+
+func (q *Queue) Add(val interface{}) {
+	if q.arr == nil {
+		q.arr = make([]interface{}, 0)
+	}
+	q.arr = append(q.arr, val)
+}

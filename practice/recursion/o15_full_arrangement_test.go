@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+
 // 字符串的全排列  - 回溯
 func fullArrangement(str []byte, curPosition int) {
 	if curPosition == len(str)-1 {

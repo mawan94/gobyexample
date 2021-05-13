@@ -140,23 +140,21 @@ func stackIterMiddle(root *datastructure.TreeNode) {
 
 func stackIterBack(root *datastructure.TreeNode) {
 	stack := &datastructure.Stack{}
+	complete := make(map[*datastructure.TreeNode]bool)
 	curr := root
-	var prev *datastructure.TreeNode = nil // 处理完右侧回归时候需要判断该节点的右侧是否已经处理过了
 	for curr != nil || !stack.IsEmpty() {
 		for curr != nil {
 			stack.Push(curr)
 			curr = curr.Left
 		}
-		if !stack.IsEmpty() {
-			curr = stack.Pop().(*datastructure.TreeNode)
-			if curr.Right != nil && curr != prev {
-				stack.Push(curr)
-				prev = curr
-				curr = curr.Right
-			} else {
-				fmt.Printf("%d ", curr.Val.(int))
-				curr = nil
-			}
+		curr = stack.Pop().(*datastructure.TreeNode)
+		if curr.Right != nil && !complete[curr]{
+			stack.Push(curr)
+			complete[curr] = true
+			curr = curr.Right
+		} else {
+			fmt.Printf("%d ", curr.Val.(int))
+			curr = nil
 		}
 	}
 }
@@ -220,13 +218,11 @@ func morrisMiddle(root *datastructure.TreeNode) {
 	}
 }
 
-
-
 func morrisBack(root *datastructure.TreeNode) {
 	curr := &datastructure.TreeNode{
 		Left: root,
 	}
-	for curr!= nil {
+	for curr != nil {
 		if curr.Left != nil {
 			mostRight := curr.Left
 			for mostRight.Right != nil && mostRight.Right != curr {
@@ -255,7 +251,7 @@ func morrisBack(root *datastructure.TreeNode) {
 //	return reverseNode(cur,waitProcess)
 //}
 
-func PrintNode(root *datastructure.TreeNode)  {
+func PrintNode(root *datastructure.TreeNode) {
 	stack := &datastructure.Stack{}
 	tmp := root
 	for tmp != nil {
@@ -263,11 +259,9 @@ func PrintNode(root *datastructure.TreeNode)  {
 		tmp = tmp.Right
 	}
 	for !stack.IsEmpty() {
-		fmt.Printf("%d ",stack.Pop().(*datastructure.TreeNode).Val)
+		fmt.Printf("%d ", stack.Pop().(*datastructure.TreeNode).Val)
 	}
 }
-
-
 
 // ********** BFS **********
 func levelOrder(root *datastructure.TreeNode) {
@@ -290,7 +284,7 @@ func levelOrder(root *datastructure.TreeNode) {
 		}
 
 		fmt.Printf("%d ", curr.Val.(int))
-		if curr == currLast && !queue.IsEmpty(){
+		if curr == currLast && !queue.IsEmpty() {
 			currLast = nextLast
 			currLevel++
 			fmt.Println()
@@ -304,9 +298,18 @@ func TestIterationTree(t *testing.T) {
 		Val: 1,
 		Left: &datastructure.TreeNode{
 			Val: 2,
+			Left: &datastructure.TreeNode{
+				Val: 5,
+			},
+			Right: &datastructure.TreeNode{
+				Val: 4,
+			},
 		},
 		Right: &datastructure.TreeNode{
 			Val: 3,
+			Right: &datastructure.TreeNode{
+				Val: 8,
+			},
 		},
 	}
 

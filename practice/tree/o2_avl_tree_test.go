@@ -157,8 +157,8 @@ func (tree *AVLTree) Remove(val int) *AVLNode {
 	if node == nil {
 		return nil
 	}
+	tree.Size --
 	return tree.removeNode(tree.Root, val)
-
 }
 
 func (tree *AVLTree) removeNode(root *AVLNode, val int) *AVLNode {

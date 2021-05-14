@@ -224,7 +224,7 @@ func (tree *RBTree) Remove(val int) bool {
 // 2 兄弟节点的子节点最多有一个黑色子节点（思想1）
 
 // 一个技巧
-// 1 保证所有兄弟节点自身为黑色
+// 1 保证兄弟节点自身为黑色
 func (tree *RBTree) fixAfterDelete(curr *RBNode) {
 	for tree.Root != curr && curr.color == BLACK {
 		brother := tree.getBrother(curr)
@@ -260,7 +260,7 @@ func (tree *RBTree) fixAfterDelete(curr *RBNode) {
 				brother.color = BLACK
 				curr.Parent.color = RED
 				tree.rightRotate(curr.Parent)
-				brother = curr.Parent.Right
+				brother = curr.Parent.Left
 			}
 			// 兄弟节点的两个子子节点都是黑色的
 			if brother.Left.color == BLACK && brother.Right.color == BLACK {

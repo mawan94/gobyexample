@@ -2,6 +2,7 @@ package tree
 
 import (
 	"fmt"
+	"gobyexample/practice/datastructure"
 	"testing"
 	"unicode/utf8"
 )
@@ -13,11 +14,42 @@ type TrieNode struct {
 }
 
 type Trie struct {
-	Root  *TrieNode
+	Root *TrieNode
 }
 
 func NewTrie() *Trie {
 	return &Trie{Root: &TrieNode{children: make(map[string]*TrieNode)}}
+}
+
+func (trie *Trie) Delete(str string) {
+	curr := trie.Root
+	stack := &datastructure.Stack{}
+	for i := 0; i < utf8.RuneCountInString(str); i++ {
+		if n, ok := curr.children[string([]rune(str)[i:i+1])]; ok {
+			// 删除中间节点
+			if i == utf8.RuneCountInString(str) - 1 && len(n.children) > 0 {
+				n.isWord = false
+				return
+			}else {
+				stack.Push(n)
+				curr = n
+			}
+		} else {
+			return
+		}
+	}
+	// 删除叶子节点
+	var f func(string, int, *TrieNode)
+	f = func(str string, index int, root *TrieNode) {
+		if trie.Root == root || root.isWord{
+			return
+		}
+		delete(root.children, string([]rune(str)[index:index+1]))
+		if len(root.children) == 0 && !stack.IsEmpty() {
+			f(str, index-1, stack.Pop().(*TrieNode))
+		}
+	}
+	f(str, utf8.RuneCountInString(str)-1, stack.Pop().(*TrieNode))
 }
 
 func (trie *Trie) Insert(str string) {
@@ -31,12 +63,11 @@ func (trie *Trie) Insert(str string) {
 
 		if node, ok := curr.children[string(c)]; ok {
 			if isLast {
-				node .isWord = true
+				node.isWord = true
 			}
 			curr = node
 
 		} else {
-
 			newNode := &TrieNode{
 				isWord:   isLast,
 				value:    string(c),
@@ -133,18 +164,23 @@ func (trie *Trie) PreLike(prefix string) []string {
 }
 
 func TestTrie(t *testing.T) {
-
 	tire := NewTrie()
 	tire.Insert("我啊哦")
 	tire.Insert("我啊")
-	tire.Insert("啊我撒发啊啊😸啊啊啊")
+	tire.Insert("😸啊😬")
 	tire.Insert("嘻嘻")
+	tire.Insert("哈哈")
+	tire.Insert("哈哈哈")
 
-	println(tire.Search("嘻"))// f
-	println(tire.Search("嘻嘻")) // t
+	tire.Delete("哈哈哈")
+	fmt.Println("========")
+
+	println(tire.Search("嘻"))   // f
+	println(tire.Search("嘻嘻"))  // t
+	println(tire.Search("哈哈")) // t
 
 	fmt.Println("========")
-	ret := tire.PreLike("嘻")
+	ret := tire.PreLike("嘻嘻")
 	for _, v := range ret {
 		fmt.Println(v)
 	}

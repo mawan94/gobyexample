@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24914425-40ab-4de6-9678-cdead27b9d05" name="Default Changelist" comment="" />
+    <list default="true" id="24914425-40ab-4de6-9678-cdead27b9d05" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/tree/o4_trie_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/practice/tree/o4_trie_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/tree/o5_b_tree_test.go" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +20,9 @@
     </option>
   </component>
   <component name="GOROOT" path="/usr/local/Cellar/go/1.15.5/libexec" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
   </component>
@@ -46,7 +53,62 @@
       <recent name="$PROJECT_DIR$/tools" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestTrie in gobyexample/practice/tree (1)">
+  <component name="RunManager" selected="Go Test.TestHuffman in gobyexample/practice/tree (4)">
+    <configuration name="TestHuffman in gobyexample/practice/tree (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="gobyexample" />
+      <working_directory value="$PROJECT_DIR$/practice/tree" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="gobyexample/practice/tree" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestHuffman\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestHuffman in gobyexample/practice/tree (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="gobyexample" />
+      <working_directory value="$PROJECT_DIR$/practice/tree" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="gobyexample/practice/tree" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestHuffman\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestHuffman in gobyexample/practice/tree (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="gobyexample" />
+      <working_directory value="$PROJECT_DIR$/practice/tree" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="gobyexample/practice/tree" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestHuffman\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestHuffman in gobyexample/practice/tree (4)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="gobyexample" />
+      <working_directory value="$PROJECT_DIR$/practice/tree" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="gobyexample/practice/tree" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestHuffman\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestHuffman in gobyexample/practice/tree (5)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="gobyexample" />
+      <working_directory value="$PROJECT_DIR$/practice/tree" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="gobyexample/practice/tree" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestHuffman\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestReceiveLogsDirect in gobyexample/mq/3_routing" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
       <module name="gobyexample" />
       <working_directory value="$PROJECT_DIR$/mq/3_routing" />
@@ -59,68 +121,13 @@
       <pattern value="^\QTestReceiveLogsDirect\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestTrie in gobyexample/practice/tree (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="gobyexample" />
-      <working_directory value="$PROJECT_DIR$/practice/tree" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="gobyexample/practice/tree" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestTrie\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTrie in gobyexample/practice/tree (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="gobyexample" />
-      <working_directory value="$PROJECT_DIR$/practice/tree" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="gobyexample/practice/tree" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestTrie\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTrie in gobyexample/practice/tree (4)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="gobyexample" />
-      <working_directory value="$PROJECT_DIR$/practice/tree" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="gobyexample/practice/tree" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestTrie\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTrie in gobyexample/practice/tree (5)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="gobyexample" />
-      <working_directory value="$PROJECT_DIR$/practice/tree" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="gobyexample/practice/tree" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestTrie\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTrie in gobyexample/practice/tree" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="gobyexample" />
-      <working_directory value="$PROJECT_DIR$/practice/tree" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="gobyexample/practice/tree" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestTrie\E$" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestTrie in gobyexample/practice/tree (1)" />
-        <item itemvalue="Go Test.TestTrie in gobyexample/practice/tree" />
-        <item itemvalue="Go Test.TestTrie in gobyexample/practice/tree (5)" />
-        <item itemvalue="Go Test.TestTrie in gobyexample/practice/tree (4)" />
-        <item itemvalue="Go Test.TestTrie in gobyexample/practice/tree (3)" />
+        <item itemvalue="Go Test.TestHuffman in gobyexample/practice/tree (4)" />
+        <item itemvalue="Go Test.TestHuffman in gobyexample/practice/tree (3)" />
+        <item itemvalue="Go Test.TestHuffman in gobyexample/practice/tree (5)" />
+        <item itemvalue="Go Test.TestHuffman in gobyexample/practice/tree (2)" />
+        <item itemvalue="Go Test.TestHuffman in gobyexample/practice/tree (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -140,8 +147,8 @@
       <screen x="0" y="23" width="1440" height="833" />
     </state>
     <state x="577" y="248" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1615948777256" />
-    <state width="1124" height="170" key="GridCell.Tab.0.bottom" timestamp="1621071564797">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.0.bottom" timestamp="1621174372831">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1620656389068" />
     <state width="1209" height="304" key="GridCell.Tab.0.bottom/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876337" />
@@ -156,14 +163,15 @@
     <state width="1196" height="2" key="GridCell.Tab.0.bottom/0.23.1440.836/1440.23.1920.1057@0.23.1440.836" timestamp="1620895913823" />
     <state width="1232" height="369" key="GridCell.Tab.0.bottom/0.23.1440.836@0.23.1440.836" timestamp="1616676529204" />
     <state width="1099" height="207" key="GridCell.Tab.0.bottom/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620982883175" />
-    <state width="960" height="300" key="GridCell.Tab.0.bottom/0.23.1440.837/1440.23.1920.1057@1440.23.1920.1057" timestamp="1610610410178" />
     <state width="1250" height="272" key="GridCell.Tab.0.bottom/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977624178" />
-    <state width="1124" height="170" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1621071564797" />
+    <state width="1210" height="294" key="GridCell.Tab.0.bottom/0.23.1440.838@0.23.1440.838" timestamp="1621174104850" />
+    <state width="1210" height="124" key="GridCell.Tab.0.bottom/0.23.1440.839@0.23.1440.839" timestamp="1621174372831" />
+    <state width="1124" height="340" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1621156534580" />
     <state width="1398" height="197" key="GridCell.Tab.0.bottom/0.23.1440.841@0.23.1440.841" timestamp="1615038158692" />
     <state width="1155" height="461" key="GridCell.Tab.0.bottom/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755437" />
     <state width="1196" height="278" key="GridCell.Tab.0.bottom/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569446" />
-    <state width="1124" height="170" key="GridCell.Tab.0.center" timestamp="1621071564796">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.0.center" timestamp="1621174372830">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1620656389067" />
     <state width="1209" height="304" key="GridCell.Tab.0.center/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876335" />
@@ -178,14 +186,15 @@
     <state width="1196" height="2" key="GridCell.Tab.0.center/0.23.1440.836/1440.23.1920.1057@0.23.1440.836" timestamp="1620895913822" />
     <state width="1232" height="369" key="GridCell.Tab.0.center/0.23.1440.836@0.23.1440.836" timestamp="1616676529203" />
     <state width="1099" height="207" key="GridCell.Tab.0.center/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620982883173" />
-    <state width="960" height="300" key="GridCell.Tab.0.center/0.23.1440.837/1440.23.1920.1057@1440.23.1920.1057" timestamp="1610610410177" />
     <state width="1250" height="272" key="GridCell.Tab.0.center/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977624177" />
-    <state width="1124" height="170" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1621071564796" />
+    <state width="1210" height="294" key="GridCell.Tab.0.center/0.23.1440.838@0.23.1440.838" timestamp="1621174104850" />
+    <state width="1210" height="124" key="GridCell.Tab.0.center/0.23.1440.839@0.23.1440.839" timestamp="1621174372830" />
+    <state width="1124" height="340" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1621156534579" />
     <state width="1398" height="197" key="GridCell.Tab.0.center/0.23.1440.841@0.23.1440.841" timestamp="1615038158691" />
     <state width="1155" height="461" key="GridCell.Tab.0.center/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755436" />
     <state width="1196" height="278" key="GridCell.Tab.0.center/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569446" />
-    <state width="1124" height="170" key="GridCell.Tab.0.left" timestamp="1621071564794">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.0.left" timestamp="1621174372830">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1620656389067" />
     <state width="1209" height="304" key="GridCell.Tab.0.left/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876335" />
@@ -200,14 +209,15 @@
     <state width="1196" height="2" key="GridCell.Tab.0.left/0.23.1440.836/1440.23.1920.1057@0.23.1440.836" timestamp="1620895913822" />
     <state width="1232" height="369" key="GridCell.Tab.0.left/0.23.1440.836@0.23.1440.836" timestamp="1616676529203" />
     <state width="1099" height="207" key="GridCell.Tab.0.left/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620982883173" />
-    <state width="960" height="300" key="GridCell.Tab.0.left/0.23.1440.837/1440.23.1920.1057@1440.23.1920.1057" timestamp="1610610410176" />
     <state width="1250" height="272" key="GridCell.Tab.0.left/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977624176" />
-    <state width="1124" height="170" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1621071564794" />
+    <state width="1210" height="294" key="GridCell.Tab.0.left/0.23.1440.838@0.23.1440.838" timestamp="1621174104849" />
+    <state width="1210" height="124" key="GridCell.Tab.0.left/0.23.1440.839@0.23.1440.839" timestamp="1621174372830" />
+    <state width="1124" height="340" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1621156534579" />
     <state width="1398" height="197" key="GridCell.Tab.0.left/0.23.1440.841@0.23.1440.841" timestamp="1615038158691" />
     <state width="1155" height="461" key="GridCell.Tab.0.left/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755436" />
     <state width="1196" height="278" key="GridCell.Tab.0.left/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569445" />
-    <state width="1124" height="170" key="GridCell.Tab.0.right" timestamp="1621071564797">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.0.right" timestamp="1621174372830">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1620656389067" />
     <state width="1209" height="304" key="GridCell.Tab.0.right/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876336" />
@@ -222,14 +232,15 @@
     <state width="1196" height="2" key="GridCell.Tab.0.right/0.23.1440.836/1440.23.1920.1057@0.23.1440.836" timestamp="1620895913823" />
     <state width="1232" height="369" key="GridCell.Tab.0.right/0.23.1440.836@0.23.1440.836" timestamp="1616676529204" />
     <state width="1099" height="207" key="GridCell.Tab.0.right/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620982883174" />
-    <state width="960" height="300" key="GridCell.Tab.0.right/0.23.1440.837/1440.23.1920.1057@1440.23.1920.1057" timestamp="1610610410177" />
     <state width="1250" height="272" key="GridCell.Tab.0.right/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977624177" />
-    <state width="1124" height="170" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1621071564797" />
+    <state width="1210" height="294" key="GridCell.Tab.0.right/0.23.1440.838@0.23.1440.838" timestamp="1621174104850" />
+    <state width="1210" height="124" key="GridCell.Tab.0.right/0.23.1440.839@0.23.1440.839" timestamp="1621174372830" />
+    <state width="1124" height="340" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1621156534580" />
     <state width="1398" height="197" key="GridCell.Tab.0.right/0.23.1440.841@0.23.1440.841" timestamp="1615038158691" />
     <state width="1155" height="461" key="GridCell.Tab.0.right/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755437" />
     <state width="1196" height="278" key="GridCell.Tab.0.right/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569446" />
-    <state width="1124" height="170" key="GridCell.Tab.1.bottom" timestamp="1621071564708">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.1.bottom" timestamp="1621174373244">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1620656388938" />
     <state width="1209" height="304" key="GridCell.Tab.1.bottom/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876258" />
@@ -245,12 +256,14 @@
     <state width="1196" height="223" key="GridCell.Tab.1.bottom/0.23.1440.836@0.23.1440.836" timestamp="1614874087468" />
     <state width="1369" height="343" key="GridCell.Tab.1.bottom/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620981909085" />
     <state width="1250" height="300" key="GridCell.Tab.1.bottom/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977416869" />
-    <state width="1124" height="170" key="GridCell.Tab.1.bottom/0.23.1440.840@0.23.1440.840" timestamp="1621071564708" />
+    <state width="1210" height="294" key="GridCell.Tab.1.bottom/0.23.1440.838@0.23.1440.838" timestamp="1621174104770" />
+    <state width="1210" height="124" key="GridCell.Tab.1.bottom/0.23.1440.839@0.23.1440.839" timestamp="1621174373244" />
+    <state width="1124" height="340" key="GridCell.Tab.1.bottom/0.23.1440.840@0.23.1440.840" timestamp="1621156534452" />
     <state width="1398" height="222" key="GridCell.Tab.1.bottom/0.23.1440.841@0.23.1440.841" timestamp="1615038049915" />
     <state width="1155" height="461" key="GridCell.Tab.1.bottom/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755870" />
     <state width="1196" height="278" key="GridCell.Tab.1.bottom/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569752" />
-    <state width="1124" height="170" key="GridCell.Tab.1.center" timestamp="1621071564708">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.1.center" timestamp="1621174373243">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1620656388937" />
     <state width="1209" height="304" key="GridCell.Tab.1.center/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876258" />
@@ -266,12 +279,14 @@
     <state width="1196" height="223" key="GridCell.Tab.1.center/0.23.1440.836@0.23.1440.836" timestamp="1614874087467" />
     <state width="1369" height="343" key="GridCell.Tab.1.center/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620981909084" />
     <state width="1250" height="300" key="GridCell.Tab.1.center/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977416868" />
-    <state width="1124" height="170" key="GridCell.Tab.1.center/0.23.1440.840@0.23.1440.840" timestamp="1621071564708" />
+    <state width="1210" height="294" key="GridCell.Tab.1.center/0.23.1440.838@0.23.1440.838" timestamp="1621174104769" />
+    <state width="1210" height="124" key="GridCell.Tab.1.center/0.23.1440.839@0.23.1440.839" timestamp="1621174373243" />
+    <state width="1124" height="340" key="GridCell.Tab.1.center/0.23.1440.840@0.23.1440.840" timestamp="1621156534450" />
     <state width="1398" height="222" key="GridCell.Tab.1.center/0.23.1440.841@0.23.1440.841" timestamp="1615038049914" />
     <state width="1155" height="461" key="GridCell.Tab.1.center/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755870" />
     <state width="1196" height="278" key="GridCell.Tab.1.center/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569751" />
-    <state width="1124" height="170" key="GridCell.Tab.1.left" timestamp="1621071564706">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.1.left" timestamp="1621174373243">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1620656388937" />
     <state width="1209" height="304" key="GridCell.Tab.1.left/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876257" />
@@ -287,12 +302,14 @@
     <state width="1196" height="223" key="GridCell.Tab.1.left/0.23.1440.836@0.23.1440.836" timestamp="1614874087467" />
     <state width="1369" height="343" key="GridCell.Tab.1.left/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620981909084" />
     <state width="1250" height="300" key="GridCell.Tab.1.left/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977416868" />
-    <state width="1124" height="170" key="GridCell.Tab.1.left/0.23.1440.840@0.23.1440.840" timestamp="1621071564706" />
+    <state width="1210" height="294" key="GridCell.Tab.1.left/0.23.1440.838@0.23.1440.838" timestamp="1621174104769" />
+    <state width="1210" height="124" key="GridCell.Tab.1.left/0.23.1440.839@0.23.1440.839" timestamp="1621174373243" />
+    <state width="1124" height="340" key="GridCell.Tab.1.left/0.23.1440.840@0.23.1440.840" timestamp="1621156534449" />
     <state width="1398" height="222" key="GridCell.Tab.1.left/0.23.1440.841@0.23.1440.841" timestamp="1615038049914" />
     <state width="1155" height="461" key="GridCell.Tab.1.left/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755869" />
     <state width="1196" height="278" key="GridCell.Tab.1.left/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569750" />
-    <state width="1124" height="170" key="GridCell.Tab.1.right" timestamp="1621071564708">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1210" height="124" key="GridCell.Tab.1.right" timestamp="1621174373244">
+      <screen x="0" y="23" width="1440" height="839" />
     </state>
     <state width="1398" height="293" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1620656388938" />
     <state width="1209" height="304" key="GridCell.Tab.1.right/0.23.1440.833/1440.23.1920.1057@0.23.1440.833" timestamp="1620725876258" />
@@ -308,7 +325,9 @@
     <state width="1196" height="223" key="GridCell.Tab.1.right/0.23.1440.836@0.23.1440.836" timestamp="1614874087467" />
     <state width="1369" height="343" key="GridCell.Tab.1.right/0.23.1440.837/1440.23.1920.1057@0.23.1440.837" timestamp="1620981909084" />
     <state width="1250" height="300" key="GridCell.Tab.1.right/0.23.1440.838/1440.23.1920.1057@0.23.1440.838" timestamp="1620977416869" />
-    <state width="1124" height="170" key="GridCell.Tab.1.right/0.23.1440.840@0.23.1440.840" timestamp="1621071564708" />
+    <state width="1210" height="294" key="GridCell.Tab.1.right/0.23.1440.838@0.23.1440.838" timestamp="1621174104769" />
+    <state width="1210" height="124" key="GridCell.Tab.1.right/0.23.1440.839@0.23.1440.839" timestamp="1621174373244" />
+    <state width="1124" height="340" key="GridCell.Tab.1.right/0.23.1440.840@0.23.1440.840" timestamp="1621156534451" />
     <state width="1398" height="222" key="GridCell.Tab.1.right/0.23.1440.841@0.23.1440.841" timestamp="1615038049914" />
     <state width="1155" height="461" key="GridCell.Tab.1.right/0.23.1440.877/1440.23.1920.1013@0.23.1440.877" timestamp="1620377755870" />
     <state width="1196" height="278" key="GridCell.Tab.1.right/0.23.1440.877/1440.23.1920.1013@1440.23.1920.1013" timestamp="1620900569752" />
@@ -339,6 +358,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/practice/tree/o5_huffman_tree_test.go</url>
+          <line>181</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="DlvErrorBreakpoint" />
       </default-breakpoints>

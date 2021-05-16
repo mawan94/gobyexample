@@ -41,7 +41,7 @@ func (trie *Trie) Delete(str string) {
 	// 删除叶子节点
 	var f func(string, int, *TrieNode)
 	f = func(str string, index int, root *TrieNode) {
-		if trie.Root == root || root.isWord{
+		if root.isWord{
 			return
 		}
 		delete(root.children, string([]rune(str)[index:index+1]))
@@ -128,7 +128,7 @@ func (trie *Trie) Like(suffix string) []string {
 	return ret
 }
 
-// 模糊查询（后%）
+// 模糊查询（abc%）
 func (trie *Trie) PreLike(prefix string) []string {
 	ret := make([]string, 0)
 	curr := trie.Root
@@ -165,8 +165,8 @@ func (trie *Trie) PreLike(prefix string) []string {
 
 func TestTrie(t *testing.T) {
 	tire := NewTrie()
-	tire.Insert("我啊哦")
-	tire.Insert("我啊")
+	tire.Insert("我啊哦s")
+	tire.Insert("我啊s")
 	tire.Insert("😸啊😬")
 	tire.Insert("嘻嘻")
 	tire.Insert("哈哈")

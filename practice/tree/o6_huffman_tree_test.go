@@ -2,8 +2,6 @@ package tree
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"sort"
 	"testing"
 	"unicode/utf8"
@@ -33,8 +31,9 @@ type HuffmanTree struct {
 
 // 构建哈夫曼树
 func CreateHuffmanTree(bytes []byte) *HuffmanTree {
-	// k: byte ,v: 字符重复出现的次数
+	// key: 每个字节     value: 字节重复出现的次数
 	byteMap := make(map[byte]int)
+	// 统计每个字节重复出现的次数
 	for _, b := range bytes {
 		if count, ok := byteMap[b]; ok {
 			byteMap[b] = count + 1
@@ -45,7 +44,6 @@ func CreateHuffmanTree(bytes []byte) *HuffmanTree {
 
 	// 将map中的元素按照weight从小到大进行排序 放入list中
 	list := make([]HuffmanNode, len(byteMap))
-
 	currIndex := 0
 	for k, v := range byteMap {
 		node := HuffmanNode{
@@ -86,6 +84,7 @@ func CreateHuffmanTree(bytes []byte) *HuffmanTree {
 // 根据哈弗曼树获取哈夫曼编码
 func HuffmanCode(tree *HuffmanTree) map[byte]string {
 	hfmCode := make(map[byte]string)
+
 	var f func(*HuffmanNode, string)
 	f = func(node *HuffmanNode, path string) {
 		if node != nil {
@@ -118,7 +117,7 @@ func Encode(table map[byte]string, src []byte) ([]byte, int) {
 		retLen = (utf8.RuneCountInString(str) / 8) + 1
 	}
 	ret := make([]byte, retLen)
-	// todo 优化
+
 	for i, j := 0, 0; i < len(ret); i, j = i+1, j+8 {
 		if j+8 < len(str) {
 			ret[i] = binaryString2Byte(subString(str, j, j+8))
@@ -145,14 +144,14 @@ func Decode(bytes []byte, table map[byte]string, length int) []byte {
 	var hfmCodeMaxLen int
 	decodeMap := make(map[string]byte)
 	for k, v := range table {
-		if len(v) > hfmCodeMaxLen{
+		if len(v) > hfmCodeMaxLen {
 			hfmCodeMaxLen = len(v)
 		}
 		decodeMap[v] = k
 	}
 	// 每个前缀不一样
 	ret := make([]byte, 0)
-	// todo 性能差
+
 	var f func(int, int)
 	f = func(begin, end int) {
 		if begin > end {
@@ -160,9 +159,14 @@ func Decode(bytes []byte, table map[byte]string, length int) []byte {
 		}
 		if b, ok := decodeMap[string([]rune(str)[begin:end])]; ok {
 			ret = append(ret, b)
-			f(begin+(end-begin), begin+(end-begin) + hfmCodeMaxLen)
+			if begin+(end-begin)+hfmCodeMaxLen < len(str) {
+				f(begin+(end-begin), begin+(end-begin)+hfmCodeMaxLen)
+			} else {
+				f(begin+(end-begin), len(str))
+			}
+
 		} else {
-			f(begin, end - 1)
+			f(begin, end-1)
 		}
 	}
 	f(0, hfmCodeMaxLen)
@@ -181,6 +185,14 @@ func subString(str string, begin, end int) string {
 func binaryString2Byte(binaryString string) byte {
 	var ret byte
 	var j byte = 1
+
+	// 确保位数为8
+	//prefix := ""
+	//for i := utf8.RuneCountInString(binaryString); i < 8; i++ {
+	//	prefix += "0"
+	//}
+	//binaryString = prefix + binaryString
+
 	for i := 0; i < len(binaryString); i++ {
 		char := binaryString[len(binaryString)-1-i]
 		if char == '0' || char == '1' {
@@ -213,14 +225,11 @@ func byte2BinaryString(x byte) string {
 }
 
 func TestHuffman(t *testing.T) {
-	resp, _ := http.Get("https://www.bilibili.com")
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(len(body)/1024,"KB")
-	src := body
+	src := []byte("sa的个多少个点是🔍")
 	tree := CreateHuffmanTree(src)
 	codeTable := HuffmanCode(tree)
 	huffmanBytes, length := Encode(codeTable, src)
-	fmt.Println(len(huffmanBytes)/1024,"KB")
+	fmt.Println(len(huffmanBytes)/1024, "KB")
 
 	ret := Decode(huffmanBytes, codeTable, length)
 	fmt.Println(string(ret))

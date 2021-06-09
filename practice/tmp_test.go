@@ -757,10 +757,10 @@ func divingBoard(shorter int, longer int, k int) []int {
 	}
 
 	// level2
-	ret = append(ret, 2 * shorter)
+	ret = append(ret, 2*shorter)
 	if shorter != longer {
-		ret = append(ret, shorter + longer)
-		ret = append(ret, 2 * longer)
+		ret = append(ret, shorter+longer)
+		ret = append(ret, 2*longer)
 	}
 
 	for currentLevel := 3; currentLevel <= k; currentLevel++ {
@@ -769,7 +769,7 @@ func divingBoard(shorter int, longer int, k int) []int {
 		}
 
 		if shorter != longer {
-			ret = append(ret, currentLevel * longer)
+			ret = append(ret, currentLevel*longer)
 		}
 
 	}

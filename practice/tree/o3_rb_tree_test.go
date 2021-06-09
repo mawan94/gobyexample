@@ -138,8 +138,7 @@ func (tree *RBTree) Add(val int) bool {
 	return true
 }
 
-
-// 简单二叉树的插入
+// 二叉树的插入 返回的insertRet为插入的元素
 func (tree *RBTree) add(node *RBNode, insert *RBNode, val int) (root, insertRet *RBNode) {
 	if node == tree.LEAF {
 		insert = &RBNode{
@@ -161,12 +160,11 @@ func (tree *RBTree) add(node *RBNode, insert *RBNode, val int) (root, insertRet 
 	return node, insert
 }
 
-
-// 平衡修复
+// 插入后的平衡修复
 func (tree *RBTree) fixAfterInsertion(curr *RBNode) {
 	if curr.Parent == nil {
 		tree.Root.color = BLACK
-	} else if curr.Parent.color == RED {
+	} else if curr.Parent.color == RED { // 父节点为红色
 		uncle := tree.getUncle(curr)
 		grandparents := tree.getGrandparents(curr)
 		if uncle.color == RED { // PARENT UNCLE 双红
@@ -185,7 +183,7 @@ func (tree *RBTree) fixAfterInsertion(curr *RBNode) {
 				} else {
 					tree.leftRotate(grandparents)
 				}
-			} else {                          // 父红不同侧
+			} else { // 父红不同侧
 				if curr.Parent.Left == curr { //RL
 					tree.rightRotate(curr.Parent)
 					tree.fixAfterInsertion(curr.Right)
@@ -203,7 +201,6 @@ func (tree *RBTree) Remove(val int) bool {
 	if root == nil {
 		return false
 	}
-
 	tree.Size--
 	if removed.color == BLACK && tree.Size > 0 {
 		if replace != tree.LEAF {
@@ -241,7 +238,7 @@ func (tree *RBTree) fixAfterDelete(curr *RBNode) {
 			if brother.Left.color == BLACK && brother.Right.color == BLACK {
 				brother.color = RED
 				curr = curr.Parent // 向上递归处理
-			} else {                              // 兄弟节点的子节点最多有一个为黑色节点
+			} else { // 兄弟节点的子节点最多有一个为黑色节点
 				if brother.Right.color == BLACK { // 把情况转换成兄弟节点的右侧子节点是红色
 					brother.Left.color = BLACK
 					brother.color = RED

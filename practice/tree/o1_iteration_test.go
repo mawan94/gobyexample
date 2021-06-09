@@ -139,8 +139,8 @@ func stackIterMiddle(root *datastructure.TreeNode) {
 }
 
 func stackIterBack(root *datastructure.TreeNode) {
+	complete := make(map[*datastructure.TreeNode]bool) // 收集已经处理完的"右侧"
 	stack := &datastructure.Stack{}
-	complete := make(map[*datastructure.TreeNode]bool)
 	curr := root
 	for curr != nil || !stack.IsEmpty() {
 		for curr != nil {
@@ -148,9 +148,9 @@ func stackIterBack(root *datastructure.TreeNode) {
 			curr = curr.Left
 		}
 		curr = stack.Pop().(*datastructure.TreeNode)
-		if curr.Right != nil && !complete[curr]{
+		if curr.Right != nil && !complete[curr] {
 			stack.Push(curr)
-			complete[curr] = true
+			complete[curr] = true // 标记为已处理
 			curr = curr.Right
 		} else {
 			fmt.Printf("%d ", curr.Val.(int))
@@ -180,11 +180,12 @@ func morrisFront(root *datastructure.TreeNode) {
 			for pre.Right != nil && pre.Right != cur {
 				pre = pre.Right
 			}
-			if pre.Right == nil { // 第一次到达左子树的最右端
+
+			if pre.Right == nil { // 第一次到达后继节点
 				fmt.Printf("%d ", cur.Val.(int))
 				pre.Right = cur
 				cur = cur.Left
-			} else { // 第二次到达左子树的最右端
+			} else { // 第二次到达后继节点
 				pre.Right = nil
 				cur = cur.Right
 			}
@@ -242,15 +243,6 @@ func morrisBack(root *datastructure.TreeNode) {
 	}
 }
 
-//func reverseNode(pre,cur *datastructure.TreeNode) *datastructure.TreeNode {
-//	if cur == nil   {
-//		return pre
-//	}
-//	waitProcess := cur.Right
-//	cur.Right = pre
-//	return reverseNode(cur,waitProcess)
-//}
-
 func PrintNode(root *datastructure.TreeNode) {
 	stack := &datastructure.Stack{}
 	tmp := root
@@ -284,7 +276,7 @@ func levelOrder(root *datastructure.TreeNode) {
 		}
 
 		fmt.Printf("%d ", curr.Val.(int))
-		if curr == currLast && !queue.IsEmpty() {
+		if curr == currLast && !queue.IsEmpty() { // 将到达下一层
 			currLast = nextLast
 			currLevel++
 			fmt.Println()
@@ -298,18 +290,12 @@ func TestIterationTree(t *testing.T) {
 		Val: 1,
 		Left: &datastructure.TreeNode{
 			Val: 2,
-			Left: &datastructure.TreeNode{
-				Val: 5,
-			},
 			Right: &datastructure.TreeNode{
 				Val: 4,
 			},
 		},
 		Right: &datastructure.TreeNode{
 			Val: 3,
-			Right: &datastructure.TreeNode{
-				Val: 8,
-			},
 		},
 	}
 

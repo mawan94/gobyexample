@@ -157,7 +157,7 @@ func (tree *AVLTree) Remove(val int) *AVLNode {
 	if node == nil {
 		return nil
 	}
-	tree.Size --
+	tree.Size--
 	return tree.removeNode(tree.Root, val)
 }
 
@@ -171,21 +171,21 @@ func (tree *AVLTree) removeNode(root *AVLNode, val int) *AVLNode {
 		ret = root
 	} else {
 		if root.Left == nil { // 左子树为空
-			if root == tree.Root{
+			if root == tree.Root {
 				tree.Root = root.Right
 			}
 			ret = root.Right
 		} else if root.Right == nil { // 右子树为空
-			if root == tree.Root{
+			if root == tree.Root {
 				tree.Root = root.Left
 			}
 			ret = root.Left
-		} else { // 左右子树均不为空
+		} else { // 左右子树均不为空 找到前驱或者后继节点替换
 			replace := tree.GetMinNode(root.Right)
 			replace.Right = tree.removeNode(root.Right, replace.Val)
 			replace.Left = root.Left
 			ret = replace
-			if root == tree.Root{
+			if root == tree.Root {
 				tree.Root = ret
 			}
 		}
@@ -193,10 +193,9 @@ func (tree *AVLTree) removeNode(root *AVLNode, val int) *AVLNode {
 	if ret == nil {
 		return ret
 	}
-	// ***** 平衡调整 *****
 	// 更新高度
 	ret.height = int(math.Max(float64(tree.GetHeight(ret.Left)), float64(tree.GetHeight(ret.Right)))) + 1
-
+	// ***** 平衡调整 *****
 	balanceFactor := tree.GetBalanceFactor(ret)
 	if balanceFactor > 1 && tree.GetBalanceFactor(ret.Left) > 0 {
 		return tree.rightRotate(ret)

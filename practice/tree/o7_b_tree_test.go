@@ -46,47 +46,48 @@ func (tree *BTree) split(curr *BNode) {
 			entries: entries[midIndex+1:],
 			isLeaf:  curr.isLeaf,
 		}
+		// " \/ "模型关联孩子节点
 		if !curr.isLeaf {
 			left.children = curr.children[:midIndex+1]
 			right.children = curr.children[midIndex+1:]
 		}
-		// 更新下层parent - 上层分裂后的产物
+		// 孩子节点的parent的指针指向新分裂的节点
 		for _, e := range left.children {
 			e.parent = left
 		}
 		for _, e := range right.children {
 			e.parent = right
 		}
+
 		parent := curr.parent
+		// 代表此时current就是原先的root节点
 		if parent == nil {
 			root := &BNode{
 				entries:  []Entry{midEntry},
 				isLeaf:   false,
 				children: []*BNode{left, right},
 			}
-			root.children[0].parent, root.children[1].parent = root, root
+			for _, e := range root.children {
+				e.parent = root
+			}
 			tree.Root = root
 			return
 		} else {
-			// 组装parent
 			parentsEntries := parent.entries
 			parentsChildren := parent.children
+			// 帮midEntry找到合适的位置插入到parentsEntries里面
+			targetInsertIndex := findTargetIndex(midEntry, parentsEntries)
 
-			// 找到合适的位置插入到parentsEntries里面
-			targetInsertIndex := findTargetInsertIndex(midEntry, parentsEntries)
-
-			// insert midEntry 2 parent entries
 			parent.entries = append(parentsEntries[:targetInsertIndex], append([]Entry{midEntry}, parentsEntries[targetInsertIndex:]...)...)
-			// replace new children
-			left.parent, right.parent = parent, parent // 如果parent不需要分裂则parent就不需要改动  要是需要分裂会在上层for_range做处理
 			parent.children = append(parentsChildren[:targetInsertIndex], append([]*BNode{left, right}, parentsChildren[targetInsertIndex+1:]...)...)
+			left.parent, right.parent = parent, parent
 			tree.split(parent)
 		}
 	}
 }
 
 // 在有序数组entries中找到 比entry大最少的索引
-func findTargetInsertIndex(entry Entry, entries []Entry) int {
+func findTargetIndex(entry Entry, entries []Entry) int {
 	targetIndex := 0
 	for ; len(entries) > targetIndex && entry.key > entries[targetIndex].key; targetIndex++ {
 	}
@@ -102,7 +103,7 @@ func (tree *BTree) insert(node *BNode, entry Entry) {
 		return
 	}
 	// 找到目标插入点
-	targetIndex := findTargetInsertIndex(entry, node.entries)
+	targetIndex := findTargetIndex(entry, node.entries)
 	// 叶子节点 尝试插入
 	if node.isLeaf {
 		// 在第targetIndex个位置插入data
@@ -128,17 +129,19 @@ func (tree *BTree) Delete(entry Entry) {
 	tree.delete(tree.Root, entry)
 }
 
+func (tree *BTree) Find(key int) *Entry {
+	return tree.findByKey(tree.Root, key)
+}
+
 func (tree *BTree) findByKey(curr *BNode, key int) *Entry {
 	if curr == nil {
 		return nil
 	}
-
 	for i := 0; i < len(curr.entries); i++ {
 		if curr.entries[i].key == key {
 			return &curr.entries[i]
 		}
-
-		if key < curr.entries[i].key {
+		if key < curr.entries[i].key && curr.children != nil {
 			return tree.findByKey(curr.children[i], key)
 		}
 
@@ -146,7 +149,6 @@ func (tree *BTree) findByKey(curr *BNode, key int) *Entry {
 			return tree.findByKey(curr.children[len(curr.children)-1], key)
 		}
 	}
-
 	return nil
 }
 
@@ -154,35 +156,26 @@ func (tree *BTree) delete(node *BNode, entry Entry) {
 	if node == nil {
 		return
 	}
-	for i := 0; i < len(node.entries); i++ {
-		if entry.key <= node.entries[i].key {
-			if entry == node.entries[i] { // 目标元素 进行删除操作
-				if node == tree.Root { // 直接删除
-					node.entries = append(node.entries[:i], append(node.entries[i+1:])...)
-					if len(node.entries) == 0 {
-						node.isLeaf = true
-					}
-					return
-				} else if node.isLeaf {
-					tree.deleteLeafNode(node, entry)
-				} else {
-					// 找到其可以代替的节点 （前躯或者后继）
-					replacement := node.children[i]
-					for !replacement.isLeaf {
-						replacement = replacement.children[len(replacement.children)-1]
-					}
-					node.entries[i] = replacement.entries[0]
-					tree.deleteLeafNode(replacement, replacement.entries[0])
-				}
-			} else {
-				tree.delete(node.children[i], entry)
+
+	targetIndex := findTargetIndex(entry, node.entries)
+	if entry == node.entries[targetIndex] {
+		if node.isLeaf {
+			tree.deleteLeafNode(node, entry)
+		} else {
+			// 上一个孩子的位置
+			prev := targetIndex - 1
+			if prev < 0 {
+				prev = 0
 			}
-			break
+			replacement := node.children[prev]
+			for !replacement.isLeaf {
+				replacement = replacement.children[len(replacement.children)-1]
+			}
+			node.entries[targetIndex] = replacement.entries[len(replacement.entries)-1]
+			tree.deleteLeafNode(replacement, replacement.entries[len(replacement.entries)-1])
 		}
-		if i == len(node.entries)-1 && node.children != nil {
-			tree.delete(node.children[len(node.children)-1], entry)
-			break
-		}
+	} else if node.children != nil {
+		tree.delete(node.children[targetIndex], entry)
 	}
 }
 
@@ -190,7 +183,6 @@ func (tree *BTree) deleteLeafNode(node *BNode, entry Entry) {
 	tree.size--
 	//case1: ceil(m/2) - 1 > entries size    :直接删除
 	if len(node.entries) > tree.m%2+tree.m/2-1 {
-		//TODO  这里可以用二分法快速定位
 		targetIndex := 0
 		for ; node.entries[targetIndex] != entry; targetIndex++ {
 		}
@@ -241,8 +233,8 @@ func (tree *BTree) deleteLeafNode(node *BNode, entry Entry) {
 				for ; parent.children[nodeIndex] != curr; nodeIndex++ {
 				}
 
-				fmt.Println(len(parent.children)>>1, nodeIndex)
-				if (len(parent.children)>>1)-1 <= nodeIndex { // curr在parent.child右半部分   parent entry放后面
+				mid := len(parent.children) / 2
+				if mid <= nodeIndex { // curr在parent.child右半部分   parent entry放后面
 					entry := parent.entries[nodeIndex-1]
 					brother := parent.children[nodeIndex-1]
 					mergeNode := &BNode{
@@ -289,13 +281,25 @@ func (tree *BTree) deleteLeafNode(node *BNode, entry Entry) {
 }
 
 func TestBTree(t *testing.T) {
-	bTree := NewBTree(8)
+	bTree := NewBTree(3)
 
-	for i := 1; i <= 1000000; i++ {
-		bTree.Insert(Entry{key: i, value: i})
+	data := make([]Entry, 8)
+
+	for i := 1; i < len(data); i++ {
+		data[i] = Entry{key: i, value: i}
+		bTree.Insert(data[i])
 	}
-	fmt.Println(bTree)
-	entry := bTree.findByKey(bTree.Root,123456)
-	fmt.Println(entry)
+
+	bTree.Delete(data[2])
+	bTree.Delete(data[4])
+	bTree.Delete(data[1])
+	bTree.Delete(data[1])
+	bTree.Delete(data[1])
+	bTree.Delete(data[1])
+	//println(bTree.Find(2))
+	//find := bTree.Find(3)
+	find2 := bTree.Find(3)
+	//fmt.Println(find.key)
+	fmt.Println(find2.key)
 
 }

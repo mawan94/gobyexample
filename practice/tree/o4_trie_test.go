@@ -27,10 +27,10 @@ func (trie *Trie) Delete(str string) {
 	for i := 0; i < utf8.RuneCountInString(str); i++ {
 		if n, ok := curr.children[string([]rune(str)[i:i+1])]; ok {
 			// 删除中间节点
-			if i == utf8.RuneCountInString(str) - 1 && len(n.children) > 0 {
+			if i == utf8.RuneCountInString(str)-1 && len(n.children) > 0 {
 				n.isWord = false
 				return
-			}else {
+			} else {
 				stack.Push(n)
 				curr = n
 			}
@@ -41,7 +41,7 @@ func (trie *Trie) Delete(str string) {
 	// 删除叶子节点
 	var f func(string, int, *TrieNode)
 	f = func(str string, index int, root *TrieNode) {
-		if root.isWord{
+		if root.isWord {
 			return
 		}
 		delete(root.children, string([]rune(str)[index:index+1]))
@@ -56,18 +56,18 @@ func (trie *Trie) Insert(str string) {
 	curr := trie.Root
 	index := 0
 	for _, c := range str {
+		// 否来到了最后一个字符（单词的结尾）
 		var isLast = false
 		if index == utf8.RuneCountInString(str)-1 {
 			isLast = true
 		}
-
+		// 如果已经存在了当前字符就继续往下找
 		if node, ok := curr.children[string(c)]; ok {
-			if isLast {
+			if isLast { //
 				node.isWord = true
 			}
 			curr = node
-
-		} else {
+		} else { // 不存在就创建一个 放到curr的children里面
 			newNode := &TrieNode{
 				isWord:   isLast,
 				value:    string(c),
@@ -104,8 +104,10 @@ func (trie *Trie) Search(str string) bool {
 func (trie *Trie) Like(suffix string) []string {
 	ret := make([]string, 0)
 	var f func(*TrieNode, int, string)
+
 	// currIndex  表示当前处理的字符
 	f = func(node *TrieNode, currIndex int, path string) {
+		// 成功在某一条路径上匹配完了 suffix的所有字符
 		if currIndex == utf8.RuneCountInString(suffix) {
 			// 成功找到一条数据
 			ret = append(ret, trie.PreLike(path)...)
@@ -116,10 +118,10 @@ func (trie *Trie) Like(suffix string) []string {
 		}
 		children := node.children
 		for _, v := range children {
-			// 如果找到了就在该路径下继续探测
+			// 如果找到了就将目标定位到下一个字符（新的目标任务）
 			if v.value.(string) == string([]rune(suffix)[currIndex:currIndex+1]) {
 				f(v, currIndex+1, path+v.value.(string))
-			} else { // 如果没有找到就向子路径去尝试
+			} else { // 如果没有找到就继续在子路径上向下找
 				f(v, currIndex, path+v.value.(string))
 			}
 		}
@@ -128,30 +130,35 @@ func (trie *Trie) Like(suffix string) []string {
 	return ret
 }
 
-// 模糊查询（abc%）
+// 前缀（abc%）
 func (trie *Trie) PreLike(prefix string) []string {
 	ret := make([]string, 0)
 	curr := trie.Root
 	index := 0
 	for _, c := range prefix {
 		node := curr.children[string(c)]
+		// 没有任何下属子节点直接返回
 		if node == nil {
 			return ret
 		} else {
 			curr = node
 		}
+		// 如果最后一个字符正好是一个字符的结尾，则将其先加入返回值中
 		if index == utf8.RuneCountInString(prefix)-1 && node.isWord {
 			ret = append(ret, prefix)
 		}
 		index++
 	}
+
+	// 定义一个函数 ： 找到当前节点下所有的单词
 	var f func(*TrieNode, string)
 	f = func(node *TrieNode, path string) {
 		children := node.children
 		for k, n := range children {
 			if n.isWord {
+				// 加入结果集
 				ret = append(ret, prefix+path+k)
-				if len(n.children) > 0 {
+				if len(n.children) > 0 { // 继续向下拼接
 					f(n, path+k)
 				}
 			} else {
@@ -175,8 +182,8 @@ func TestTrie(t *testing.T) {
 	tire.Delete("哈哈哈")
 	fmt.Println("========")
 
-	println(tire.Search("嘻"))   // f
-	println(tire.Search("嘻嘻"))  // t
+	println(tire.Search("嘻"))  // f
+	println(tire.Search("嘻嘻")) // t
 	println(tire.Search("哈哈")) // t
 
 	fmt.Println("========")

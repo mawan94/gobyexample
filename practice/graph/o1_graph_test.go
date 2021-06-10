@@ -122,9 +122,9 @@ func isInside(vertexArr []int, index int) bool {
 	return false
 }
 
-func mergeVertexSet(vertexSet [][]int, i, j int) {
+func mergeVertexSet(vertexSet [][]int, i, j int) [][]int {
 	vertexSet[j] = append(vertexSet[j], vertexSet[i]...)
-	vertexSet = append(vertexSet[:i], vertexSet[i+1:]...)
+	return append(vertexSet[:i], vertexSet[i+1:]...)
 }
 
 func (graph *Graph) DFS(vertexIndex int) {
@@ -172,6 +172,7 @@ func (graph *Graph) BFS(vertexIndex int) {
 }
 
 // 普利姆最小生成树
+// 从一个点开始，找到这个点相邻的所有边。在这些边中挑选出来权值最小的一条边。然后将状态转移到这条边的另外一个顶点，周而复始。直到收集到的边数量满足顶点个数 - 1为止
 func (graph *Graph) PrimTree(vertexIndex int) {
 	defer func() {
 		graph.EdgeArray = make([]*Edge, 0)
@@ -215,11 +216,11 @@ func (graph *Graph) PrimTree(vertexIndex int) {
 
 // 克鲁斯卡尔最小生成树
 func (graph *Graph) KruskalTree() {
-	vertexSet := make([][]int, 0)
 	defer func() {
 		graph.EdgeArray = make([]*Edge, 0)
 		graph.Reset()
 	}()
+	vertexSet := make([][]int, 0)
 
 	// step1 取出所有边
 	edgeArr := make([]*Edge, 0)
@@ -239,11 +240,11 @@ func (graph *Graph) KruskalTree() {
 	}
 	// step2 从所有边中取出组成最小生成树的边
 	// 2-1 找到结束条件
-	for len(graph.EdgeArray) < graph.Capacity-1 {
+	for len(graph.EdgeArray) < graph.Capacity-1 || len(vertexSet) != 1 {
 		// 2-2 从集合中找到最小边
 		minEdgeIndex := graph.GetMinEdgeIndex(edgeArr)
 		edgeArr[minEdgeIndex].Selected = true
-		// 2-3 找到最小边的连接点
+		// 2-3 找到最小边的连接连接顶点
 		vertexIndexA, vertexIndexB := edgeArr[minEdgeIndex].VertexIndexA, edgeArr[minEdgeIndex].VertexIndexB
 		vertexAIsInside, vertexBIsInside := false, false
 		vertexAInsideIndex, vertexBInsideIndex := -1, -1
@@ -265,7 +266,9 @@ func (graph *Graph) KruskalTree() {
 			vertexSet = append(vertexSet, slice)
 		} else if vertexAInsideIndex != -1 && vertexBInsideIndex != -1 {
 			if vertexAInsideIndex != vertexBInsideIndex {
-				mergeVertexSet(vertexSet, vertexAInsideIndex, vertexAInsideIndex)
+				vertexSet = mergeVertexSet(vertexSet, vertexAInsideIndex, vertexBInsideIndex)
+			} else {
+				continue
 			}
 		} else if vertexAInsideIndex != -1 || vertexBInsideIndex != -1 {
 			if vertexAInsideIndex != -1 {
@@ -276,6 +279,13 @@ func (graph *Graph) KruskalTree() {
 		}
 		graph.EdgeArray = append(graph.EdgeArray, edgeArr[minEdgeIndex])
 		fmt.Printf("%s --[%d]-- %s \n", graph.VertexArray[edgeArr[minEdgeIndex].VertexIndexA].Data.(string), edgeArr[minEdgeIndex].Weight, graph.VertexArray[edgeArr[minEdgeIndex].VertexIndexB].Data.(string))
+	}
+
+	for i := 0; i < len(vertexSet); i++ {
+		for j := 0; j < len(vertexSet[i]); j++ {
+			fmt.Printf("%d ", vertexSet[i][j])
+		}
+		fmt.Println()
 	}
 
 }

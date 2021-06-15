@@ -23,7 +23,7 @@ func NewTrie() *Trie {
 
 func (trie *Trie) Delete(str string) {
 	curr := trie.Root
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	for i := 0; i < utf8.RuneCountInString(str); i++ {
 		if n, ok := curr.children[string([]rune(str)[i:i+1])]; ok {
 			// 删除中间节点

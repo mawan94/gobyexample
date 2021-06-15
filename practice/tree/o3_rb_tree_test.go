@@ -334,17 +334,17 @@ func (tree *RBTree) bfsRBtree() {
 	nextLast := tmp
 	current := 1
 
-	q := &datastructure.Queue{}
-	q.Add(tmp)
+	q := datastructure.NewLinkedList()
+	q.Enqueue(tmp)
 	fmt.Printf("第%d行 -->  ", current)
 	for !q.IsEmpty() {
-		node := q.Poll().(*RBNode)
+		node := q.Dequeue().(*RBNode)
 		if node.Left != nil && node.Left != tree.LEAF {
-			q.Add(node.Left)
+			q.Enqueue(node.Left)
 			nextLast = node.Left
 		}
 		if node.Right != nil && node.Right != tree.LEAF {
-			q.Add(node.Right)
+			q.Enqueue(node.Right)
 			nextLast = node.Right
 		}
 

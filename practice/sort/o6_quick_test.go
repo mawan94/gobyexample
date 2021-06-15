@@ -6,19 +6,24 @@ import (
 	"testing"
 )
 
+/*
+	快速排序：不具备稳定性
+	核心思想：在容器中先将一个元素保证有序 然后再对其余两头拆分进行递归调用
+*/
 func quickSort(arr []int) {
 	s(arr, 0, len(arr)-1)
 }
 
 func s(arr []int, b, e int) {
-	if e-b >= 1 {
+	if e > b {
 		//prev, next := partitionV1(arr, b, e)
 		prev, next := partitionV2(arr, b, e)
-		s(arr, next, e)
 		s(arr, b, prev)
+		s(arr, next, e)
 	}
 }
 
+//挖坑填数
 func partitionV1(arr []int, b, e int) (prev, next int) {
 	headPoint := b
 	tailPoint := e
@@ -46,10 +51,10 @@ func partitionV1(arr []int, b, e int) (prev, next int) {
 	return
 }
 
+// 挤压挪动
 func partitionV2(arr []int, b, e int) (prev, next int) {
-	l := b - 1
-	r := e + 1
-	pivotVal := arr[b + rand.Intn(e-b)]
+	l, r := b-1, e+1                  // 左右边界   =>   ）E1 E2 E3 E4 ...（
+	pivotVal := arr[b+rand.Intn(e-b)] // 随机挑选一个中轴值
 
 	for i := b; i != r; {
 		if arr[i] < pivotVal {

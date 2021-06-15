@@ -46,7 +46,7 @@ func NewGraph(capacity int) *Graph {
 
 // 添加一个顶点
 func (graph *Graph) AddVertex(v *Vertex) bool {
-	if v == nil {
+	if v == nil || graph.Size == graph.Capacity {
 		return false
 	}
 	graph.VertexArray[graph.Size] = &*v
@@ -54,12 +54,14 @@ func (graph *Graph) AddVertex(v *Vertex) bool {
 	return true
 }
 
+// 重置顶点的Visited
 func (graph *Graph) Reset() {
 	for i := 0; i < len(graph.VertexArray); i++ {
 		graph.VertexArray[i].Visited = false
 	}
 }
 
+// 建立顶点关联
 func (graph *Graph) SetValue2Matrix4DirectedGraph(row, col, val int) bool {
 	if row < 0 || col < 0 || row >= graph.Capacity || col >= graph.Capacity {
 		return false
@@ -72,6 +74,7 @@ func (graph *Graph) SetValue2Matrix4UnDirectedGraph(row, col, val int) bool {
 	return graph.SetValue2Matrix4DirectedGraph(row, col, val) && graph.SetValue2Matrix4DirectedGraph(col, row, val)
 }
 
+// 检测顶点是否关联 返回弧的权重
 func (graph *Graph) GetValueFromMatrix(row, col int) (bool, int) {
 	if row < 0 || col < 0 || row >= graph.Capacity || col >= graph.Capacity {
 		return false, 0
@@ -154,9 +157,9 @@ func (graph *Graph) BFS(vertexIndex int) {
 	var process func([]int)
 	process = func(prevLineIndexes []int) {
 		currLineIndexes := make([]int, 0)
+		// 输出和prevLineIndexes连接的所有顶点
 		for i := 0; i < len(prevLineIndexes); i++ {
 			for j := 0; j < graph.Capacity; j++ {
-				// 输出和prevLineIndexes链接的所有顶点
 				if ok, val := graph.GetValueFromMatrix(prevLineIndexes[i], j); ok && val != 0 && !graph.VertexArray[j].Visited {
 					fmt.Printf("%s ", graph.VertexArray[j].Data.(string))
 					graph.VertexArray[j].Visited = true
@@ -171,8 +174,9 @@ func (graph *Graph) BFS(vertexIndex int) {
 	process([]int{vertexIndex})
 }
 
-// 普利姆最小生成树
-// 从一个点开始，找到这个点相邻的所有边。在这些边中挑选出来权值最小的一条边。然后将状态转移到这条边的另外一个顶点，周而复始。直到收集到的边数量满足顶点个数 - 1为止
+// 普里姆最小生成树 贪心思想
+// 从一个点开始，找到这个点相邻的所有边。在这些边中挑选出来权值最小的一条边。
+//然后将状态转移到这条边的另外一个顶点，周而复始。直到收集到的边数量满足 顶点个数 - 1为止
 func (graph *Graph) PrimTree(vertexIndex int) {
 	defer func() {
 		graph.EdgeArray = make([]*Edge, 0)
@@ -207,14 +211,15 @@ func (graph *Graph) PrimTree(vertexIndex int) {
 
 		// 将待选边放到已选边中
 		graph.EdgeArray = append(graph.EdgeArray, edgeArr[minEdgeIndex])
-
+		// 状态转移
 		nextVertexIndex := edgeArr[minEdgeIndex].VertexIndexB
 		vertexIndexes = append(vertexIndexes, nextVertexIndex)
 		graph.VertexArray[nextVertexIndex].Visited = true
 	}
 }
 
-// 克鲁斯卡尔最小生成树
+// 克鲁斯卡尔最小生成树 贪心思想
+// 找到图中所有的边然后逐一取最小权值边，将两端顶点合并成一组的时候就完成了最小生成树
 func (graph *Graph) KruskalTree() {
 	defer func() {
 		graph.EdgeArray = make([]*Edge, 0)
@@ -224,7 +229,7 @@ func (graph *Graph) KruskalTree() {
 
 	// step1 取出所有边
 	edgeArr := make([]*Edge, 0)
-	// 取出矩阵主对角线上半部分(不含对角线)
+	// 取出矩阵主对角线上半部分(不含对角线) PS 由于是无向图
 	for r := 0; r < graph.Capacity; r++ {
 		for c := r + 1; c < graph.Capacity; c++ {
 			if ok, val := graph.GetValueFromMatrix(r, c); ok && val != 0 {
@@ -244,11 +249,10 @@ func (graph *Graph) KruskalTree() {
 		// 2-2 从集合中找到最小边
 		minEdgeIndex := graph.GetMinEdgeIndex(edgeArr)
 		edgeArr[minEdgeIndex].Selected = true
-		// 2-3 找到最小边的连接连接顶点
+		// 2-3 找到最小边的两个顶点索引
 		vertexIndexA, vertexIndexB := edgeArr[minEdgeIndex].VertexIndexA, edgeArr[minEdgeIndex].VertexIndexB
-		vertexAIsInside, vertexBIsInside := false, false
-		vertexAInsideIndex, vertexBInsideIndex := -1, -1
-
+		vertexAIsInside, vertexBIsInside := false, false // 点是否已经存在于集合中
+		vertexAInsideIndex, vertexBInsideIndex := -1, -1 // 点在二维数组中的一维索引
 		// 2-4 找出点所在的点集合
 		for i := 0; i < len(vertexSet); i++ {
 			vertexAIsInside = isInside(vertexSet[i], vertexIndexA)

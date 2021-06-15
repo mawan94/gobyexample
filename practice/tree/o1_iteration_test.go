@@ -53,7 +53,7 @@ type Mark struct {
 }
 
 func twoColorMarkFront(root *datastructure.TreeNode) {
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	stack.Push(Mark{WHITE, root})
 	for !stack.IsEmpty() {
 		mark := stack.Pop().(Mark)
@@ -71,7 +71,7 @@ func twoColorMarkFront(root *datastructure.TreeNode) {
 }
 
 func twoColorMarkMiddle(root *datastructure.TreeNode) {
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	stack.Push(Mark{WHITE, root})
 	for !stack.IsEmpty() {
 		mark := stack.Pop().(Mark)
@@ -89,7 +89,7 @@ func twoColorMarkMiddle(root *datastructure.TreeNode) {
 }
 
 func twoColorMarkBack(root *datastructure.TreeNode) {
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	stack.Push(Mark{WHITE, root})
 	for !stack.IsEmpty() {
 		mark := stack.Pop().(Mark)
@@ -108,7 +108,7 @@ func twoColorMarkBack(root *datastructure.TreeNode) {
 
 // ======================================
 func stackIterFront(root *datastructure.TreeNode) {
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	curr := root
 	for curr != nil || !stack.IsEmpty() {
 		for curr != nil {
@@ -123,7 +123,7 @@ func stackIterFront(root *datastructure.TreeNode) {
 }
 
 func stackIterMiddle(root *datastructure.TreeNode) {
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	curr := root
 	for curr != nil || !stack.IsEmpty() {
 		for curr != nil {
@@ -140,7 +140,7 @@ func stackIterMiddle(root *datastructure.TreeNode) {
 
 func stackIterBack(root *datastructure.TreeNode) {
 	complete := make(map[*datastructure.TreeNode]bool) // 收集已经处理完的"右侧"
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	curr := root
 	for curr != nil || !stack.IsEmpty() {
 		for curr != nil {
@@ -244,7 +244,7 @@ func morrisBack(root *datastructure.TreeNode) {
 }
 
 func PrintNode(root *datastructure.TreeNode) {
-	stack := &datastructure.Stack{}
+	stack := datastructure.NewLinkedList()
 	tmp := root
 	for tmp != nil {
 		stack.Push(tmp)
@@ -260,19 +260,19 @@ func levelOrder(root *datastructure.TreeNode) {
 	currLast, nextLast := root, root // 当前层的最后一个元素 ， 下一层的最后一个元素
 	currLevel := 1                   // 当前层数
 
-	queue := datastructure.Queue{}
-	queue.Add(root)
+	queue := datastructure.NewLinkedList()
+	queue.Enqueue(root)
 	fmt.Printf("第%d层   ", currLevel)
 
 	for !queue.IsEmpty() {
-		curr := queue.Poll().(*datastructure.TreeNode)
+		curr := queue.Dequeue().(*datastructure.TreeNode)
 		if curr.Left != nil {
 			nextLast = curr.Left
-			queue.Add(curr.Left)
+			queue.Enqueue(curr.Left)
 		}
 		if curr.Right != nil {
 			nextLast = curr.Right
-			queue.Add(curr.Right)
+			queue.Enqueue(curr.Right)
 		}
 
 		fmt.Printf("%d ", curr.Val.(int))

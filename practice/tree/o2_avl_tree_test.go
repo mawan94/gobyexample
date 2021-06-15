@@ -219,19 +219,19 @@ func (tree *AVLTree) bfsTest() {
 	currLine := 1
 	currLast := root
 	NextLast := root
-	q := &datastructure.Queue{}
-	q.Add(root)
+	q := datastructure.NewLinkedList()
+	q.Enqueue(root)
 
 	fmt.Printf("第%d行   ", currLine)
 	for !q.IsEmpty() {
-		node := q.Poll().(*AVLNode)
+		node := q.Dequeue().(*AVLNode)
 		fmt.Printf("%d ", node.Val)
 		if node.Left != nil {
-			q.Add(node.Left)
+			q.Enqueue(node.Left)
 			NextLast = node.Left
 		}
 		if node.Right != nil {
-			q.Add(node.Right)
+			q.Enqueue(node.Right)
 			NextLast = node.Right
 		}
 		if currLast == node && !q.IsEmpty() {
